@@ -1,0 +1,514 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title>Matthias - D&#xe9;veloppeur Web Fullstack</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <style>
+        :root {
+            --primary-background: #0D1117;
+            --secondary-background: #161B22;
+            --text-primary: #C9D1D9;
+            --accent-color: #58A6FF;
+            --code-green: #3FB950;
+            --code-background: #161B22;
+            --footer-background: #0a0a0a;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background-color: var(--primary-background);
+            color: var(--text-primary);
+            padding-top: 60px;
+        }
+
+        .section {
+            background-color: var(--secondary-background);
+            color: var(--text-primary);
+            padding: 3rem 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero-background {
+            background: linear-gradient(135deg, var(--primary-background) 0%, var(--secondary-background) 100%);
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: inherit;
+            transform: skewY(-5deg);
+            transform-origin: bottom left;
+            z-index: -1;
+        }
+
+        .title, .subtitle{
+            color: white;
+            font-weight: bold;
+        }
+
+        .code-background {
+            background-color: var(--code-background);
+            color: var(--code-green);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .skills-section {
+            background-color: var(--primary-background);
+        }
+
+        .skills-section .column {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        .skills-section .column:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-background);
+        }
+
+        .blog-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .blog-card:hover {
+            transform: rotateY(10deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .company-logo {
+            max-height: 80px;
+            margin-bottom: 10px;
+        }
+
+        #services, #certifications, #blog {
+            background-color: var(--secondary-background);
+            color: var(--text-primary);
+        }
+
+        .navbar {
+            background-color: var(--primary-background);
+        }
+
+        .navbar-item {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-item:hover {
+            color: #fff !important;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--footer-background);
+            color: var(--text-primary);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary is-fixed-top">
+        <div class="navbar-brand">
+            <a href="https://fullstackbymatthias.dev" class="navbar-item is-size-4 has-text-weight-bold">
+                Fullstack By Matthias
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navbarBasicExample">
+            <div class="navbar-end">
+                <a href="#accueil" class="navbar-item">Accueil</a>
+                <a href="#competences" class="navbar-item">Comp&#xe9;tences</a>
+                <a href="#experiences" class="navbar-item">Exp&#xe9;riences</a>
+                <a href="#services" class="navbar-item">Services</a>
+                <a href="#certifications" class="navbar-item">Certifications</a>
+                <a href="#blog" class="navbar-item">Blog</a>
+                <a href="https://www.linkedin.com/in/matthias-d-b9504296/" class="navbar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
+                        <path  fill="white" d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                      </svg>
+                </a>
+                <a href="https://github.com/matthD/" class="navbar-item">
+                    <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="24" data-view-component="true" class="octicon octicon-mark-github">
+                        <path fill="white" d="M12.5.75C6.146.75 1 5.896 1 12.25c0 5.089 3.292 9.387 7.863 10.91.575.101.79-.244.79-.546 0-.273-.014-1.178-.014-2.142-2.889.532-3.636-.704-3.866-1.35-.13-.331-.69-1.352-1.18-1.625-.402-.216-.977-.748-.014-.762.906-.014 1.553.834 1.769 1.179 1.035 1.74 2.688 1.25 3.349.948.1-.747.402-1.25.733-1.538-2.559-.287-5.232-1.279-5.232-5.678 0-1.25.445-2.285 1.178-3.09-.115-.288-.517-1.467.115-3.048 0 0 .963-.302 3.163 1.179.92-.259 1.897-.388 2.875-.388.977 0 1.955.13 2.875.388 2.2-1.495 3.162-1.179 3.162-1.179.633 1.581.23 2.76.115 3.048.733.805 1.179 1.825 1.179 3.09 0 4.413-2.688 5.39-5.247 5.678.417.36.776 1.05.776 2.128 0 1.538-.014 2.774-.014 3.162 0 .302.216.662.79.547C20.709 21.637 24 17.324 24 12.25 24 5.896 18.854.75 12.5.75Z"></path>
+                    </svg>
+                    
+                </a>
+                <a href="mailto:contact@fullstackbymatthias.dev" class="navbar-item">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="accueil" class="hero hero-background is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1">Matthias DIEUDONNE </h1>
+                <h2 class="subtitle is-3">D&#xe9;veloppeur Fullstack JavaScript/TypeScript</h2>
+                <div class="code-background mt-4 mb-4">
+                    &gt; const developer = new FullstackPro(&quot;Matthias&quot;, [&quot;Node.js&quot;, &quot;React&quot;, &quot;Vue.js&quot;])
+                </div>
+                <p>
+                    Je suis expert (12 ans d'experiences) de l'écosystème JavaScript, TypeScript, Node et Rust...
+                    Architecte technique avec des pratiques de production sur de nombreuses bases de données NoSQL telles que
+                    redis, mongodb, elasticsearch <br/>
+                    Facilitateur agile (coaching)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences" class="section skills-section">
+        <div class="container">
+            <h2 class="title is-2 has-text-centered">Comp&#xe9;tences Techniques</h2>
+            <div class="columns is-centered mb-4 mt-4">
+                <div class="column is-4">
+                    <h3 class="title is-4">Langages</h3>
+                    <ul>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-logo mr-2">
+                                <path fill="#F7DF1E" d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.09-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.85-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                            </svg>
+                            JavaScript/TypeScript
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="24" height="24" viewBox="0 0 100 100"><path fill="#8CC84B" d="M46.279 1.067c2.479-1.419 5.709-1.425 8.186 0C66.929 8.11 79.396 15.142 91.858 22.188c2.343 1.32 3.911 3.929 3.887 6.63v42.37c.018 2.813-1.705 5.484-4.178 6.774-12.422 7.004-24.838 14.016-37.259 21.02-2.53 1.447-5.825 1.336-8.277-.23-3.724-2.159-7.455-4.307-11.18-6.464-.76-.454-1.619-.815-2.156-1.553.475-.64 1.324-.72 2.015-1 1.554-.494 2.982-1.287 4.41-2.058.361-.247.802-.152 1.148.07 3.185 1.825 6.342 3.704 9.537 5.513.682.393 1.372-.13 1.955-.454 12.19-6.89 24.396-13.754 36.584-20.645a1.21 1.21 0 0 0 .664-1.192c.009-13.977.002-27.957.005-41.934a1.31 1.31 0 0 0-.781-1.307C75.852 20.756 63.479 13.774 51.102 6.8a1.29 1.29 0 0 0-1.458-.002c-12.378 6.976-24.749 13.965-37.126 20.936-.506.23-.845.738-.785 1.301q.002 20.967 0 41.936a1.19 1.19 0 0 0 .673 1.177c3.303 1.873 6.61 3.733 9.916 5.6 1.861 1.001 4.148 1.597 6.199.829 1.81-.65 3.08-2.497 3.045-4.419.017-13.895-.009-27.793.013-41.687-.046-.617.54-1.126 1.14-1.068 1.586-.011 3.175-.022 4.762.004.663-.015 1.119.65 1.037 1.27-.007 13.984.017 27.968-.01 41.952.003 3.727-1.528 7.782-4.975 9.605-4.247 2.2-9.496 1.734-13.691-.376-3.632-1.812-7.098-3.952-10.666-5.894C6.697 76.681 4.983 74 5 71.19V28.818c-.026-2.757 1.604-5.413 4.021-6.714Q27.651 11.588 46.28 1.067"/><path fill="#8CC84B" d="M57.114 30.418c5.417-.349 11.216-.207 16.091 2.462 3.774 2.045 5.867 6.337 5.933 10.53-.105.566-.696.878-1.236.839-1.572-.002-3.144.021-4.716-.01-.667.025-1.054-.59-1.138-1.18-.451-2.006-1.545-3.993-3.434-4.96-2.898-1.452-6.26-1.379-9.42-1.348-2.308.122-4.79.322-6.744 1.679-1.5 1.028-1.957 3.103-1.421 4.774.505 1.2 1.89 1.587 3.023 1.944 6.529 1.707 13.447 1.537 19.85 3.784 2.651.916 5.245 2.697 6.152 5.473 1.187 3.72.667 8.167-1.98 11.154-2.146 2.458-5.273 3.795-8.39 4.522-4.149.925-8.454.948-12.666.538-3.962-.452-8.084-1.493-11.142-4.192-2.614-2.27-3.892-5.808-3.765-9.222.03-.577.605-.979 1.157-.931 1.583-.013 3.165-.017 4.748.002.632-.046 1.101.5 1.133 1.097.292 1.911 1.01 3.917 2.678 5.05 3.216 2.076 7.253 1.934 10.936 1.992 3.052-.136 6.477-.176 8.967-2.193 1.314-1.15 1.703-3.075 1.348-4.731-.384-1.398-1.847-2.05-3.103-2.475-6.444-2.039-13.44-1.3-19.822-3.605-2.59-.915-5.096-2.647-6.092-5.309-1.389-3.767-.752-8.427 2.172-11.313 2.852-2.87 6.968-3.976 10.881-4.372"/></svg>
+                            Node.js
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-logo mr-2">
+                                <path fill="#E34F26" d="M24,1.5l-4.5,4.5V19.5h4.5v-18h0zM.036,5.747L.25,5.5 7.321,12.572l-7.071,7.071L4.5,22.5h15l4.285-4.286 -7.071-7.071L4.5,4.5H0.036v1.247zM19.5,19.5H4.5V7.5l7.5,7.5 7.5-7.5v12z"/>
+                            </svg>
+                            HTML5/CSS3
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="24" height="24" viewBox="0 0 100 100.03"><path fill="#fff" d="m99.317 48.775-4.198-2.599a57 57 0 0 0-.12-1.222l3.608-3.366a1.44 1.44 0 0 0 .432-1.338 1.44 1.44 0 0 0-.91-1.072l-4.613-1.725a54 54 0 0 0-.36-1.19l2.876-3.996a1.444 1.444 0 0 0-.94-2.271l-4.864-.791q-.284-.553-.584-1.092l2.043-4.486a1.44 1.44 0 0 0-.112-1.402 1.44 1.44 0 0 0-1.252-.642l-4.935.172a39 39 0 0 0-.78-.946l1.134-4.807a1.444 1.444 0 0 0-1.738-1.74l-4.807 1.134a42 42 0 0 0-.947-.78l.172-4.935a1.44 1.44 0 0 0-1.327-1.492 1.44 1.44 0 0 0-.716.126l-4.484 2.045q-.543-.3-1.092-.586L70.01 4.91a1.446 1.446 0 0 0-2.27-.94l-4 2.877q-.59-.188-1.188-.36l-1.725-4.614a1.442 1.442 0 0 0-2.41-.48l-3.365 3.61a43 43 0 0 0-1.222-.119l-2.6-4.2a1.445 1.445 0 0 0-2.456 0l-2.599 4.2a43 43 0 0 0-1.224.12l-3.366-3.611a1.443 1.443 0 0 0-2.41.48l-1.724 4.613q-.599.173-1.19.36L32.266 3.97a1.44 1.44 0 0 0-1.977.275 1.45 1.45 0 0 0-.294.665l-.793 4.864q-.55.285-1.092.586l-4.485-2.045a1.44 1.44 0 0 0-1.401.114 1.44 1.44 0 0 0-.642 1.252l.172 4.935q-.48.384-.948.78L16 14.263a1.45 1.45 0 0 0-1.723 1.011 1.44 1.44 0 0 0-.016.728l1.132 4.807q-.394.468-.777.946l-4.936-.172a1.45 1.45 0 0 0-1.491 1.328c-.02.245.023.492.125.716l2.045 4.486q-.3.54-.586 1.092l-4.863.79a1.445 1.445 0 0 0-.94 2.272l2.877 3.996q-.189.591-.362 1.19l-4.612 1.725a1.446 1.446 0 0 0-.479 2.41l3.609 3.365q-.068.61-.12 1.223l-4.198 2.6a1.443 1.443 0 0 0 0 2.455l4.198 2.6q.053.613.12 1.222l-3.61 3.367a1.445 1.445 0 0 0 .479 2.41l4.612 1.725q.174.598.362 1.19L3.969 67.74a1.444 1.444 0 0 0 .941 2.27l4.862.792q.285.552.586 1.093L8.313 76.38a1.44 1.44 0 0 0 .656 1.886c.22.112.463.166.71.157l4.933-.172q.386.48.78.947l-1.132 4.809a1.44 1.44 0 0 0 .385 1.35 1.44 1.44 0 0 0 1.354.385l4.806-1.132q.47.397.948.777l-.171 4.937a1.444 1.444 0 0 0 2.042 1.364l4.485-2.043q.542.3 1.092.586l.793 4.86a1.44 1.44 0 0 0 1.593 1.205c.245-.028.478-.118.678-.262l3.996-2.879q.591.189 1.19.362l1.725 4.611a1.44 1.44 0 0 0 1.072.91 1.44 1.44 0 0 0 1.338-.431l3.366-3.609q.61.07 1.223.122l2.6 4.199a1.445 1.445 0 0 0 2.456 0l2.598-4.199q.615-.053 1.223-.122l3.366 3.609a1.44 1.44 0 0 0 1.337.432 1.44 1.44 0 0 0 1.072-.91l1.725-4.612q.599-.173 1.19-.362l3.997 2.88a1.445 1.445 0 0 0 2.27-.943l.793-4.861q.55-.287 1.092-.586l4.484 2.043a1.443 1.443 0 0 0 2.043-1.364l-.171-4.936q.48-.382.946-.778l4.807 1.132c.488.115 1-.028 1.353-.384a1.44 1.44 0 0 0 .385-1.351l-1.132-4.809q.396-.468.777-.947l4.936.172a1.44 1.44 0 0 0 1.252-.64 1.44 1.44 0 0 0 .113-1.404l-2.044-4.483q.3-.543.585-1.094l4.863-.791a1.44 1.44 0 0 0 1.102-.874 1.44 1.44 0 0 0-.162-1.397l-2.877-3.996q.187-.592.362-1.19l4.611-1.725a1.44 1.44 0 0 0 .91-1.072 1.44 1.44 0 0 0-.431-1.338l-3.608-3.366q.066-.61.12-1.222l4.198-2.6a1.44 1.44 0 0 0 .684-1.227c0-.5-.258-.966-.683-1.229M71.218 83.602a2.975 2.975 0 0 1-2.278-3.534 2.966 2.966 0 0 1 3.524-2.283 2.974 2.974 0 0 1 2.28 3.531 2.973 2.973 0 0 1-3.526 2.286m-1.426-9.648a2.71 2.71 0 0 0-3.215 2.082l-1.49 6.956A36.4 36.4 0 0 1 50 86.24a36.4 36.4 0 0 1-15.402-3.394l-1.49-6.956a2.706 2.706 0 0 0-3.214-2.082l-6.14 1.319a36 36 0 0 1-3.176-3.742h29.879c.338 0 .563-.062.563-.37V60.448c0-.308-.225-.37-.563-.37h-8.738V53.38h9.45c.863 0 4.614.246 5.813 5.04.375 1.474 1.2 6.269 1.764 7.804.561 1.722 2.848 5.162 5.286 5.162h14.889q.254-.001.54-.054a37 37 0 0 1-3.387 3.973zm-41.324 9.502a2.97 2.97 0 0 1-3.527-2.282 2.976 2.976 0 0 1 2.28-3.534 2.975 2.975 0 0 1 1.247 5.816m-11.335-45.96a2.975 2.975 0 0 1-1.51 3.923 2.967 2.967 0 0 1-3.919-1.513 2.975 2.975 0 0 1 2.642-4.178 2.97 2.97 0 0 1 2.787 1.767m-3.484 8.257 6.397-2.842a2.71 2.71 0 0 0 1.377-3.578l-1.317-2.979h5.18V59.71H14.834a36.6 36.6 0 0 1-1.393-10.028c0-1.327.072-2.64.21-3.928m28.071-2.268V36.6H54.06c.637 0 4.5.737 4.5 3.625 0 2.398-2.963 3.258-5.4 3.258H41.72m44.84 6.196q0 1.369-.1 2.714h-3.75c-.376 0-.527.247-.527.614v1.723c0 4.055-2.287 4.937-4.29 5.161-1.908.215-4.023-.798-4.284-1.966-1.126-6.33-3.001-7.682-5.963-10.019 3.676-2.334 7.5-5.777 7.5-10.386 0-4.977-3.412-8.112-5.737-9.649-3.263-2.15-6.875-2.582-7.85-2.582H22.765c5.26-5.871 12.39-10.03 20.454-11.543l4.573 4.797a2.703 2.703 0 0 0 3.828.088l5.116-4.894c10.72 1.996 19.798 8.67 25.028 17.825l-3.502 7.912a2.715 2.715 0 0 0 1.377 3.577l6.744 2.995q.177 1.795.178 3.633M47.795 9.667a2.97 2.97 0 0 1 4.198.096 2.977 2.977 0 0 1-.098 4.205 2.965 2.965 0 0 1-4.199-.097 2.977 2.977 0 0 1 .099-4.204m34.759 27.972a2.967 2.967 0 0 1 3.917-1.512 2.975 2.975 0 0 1-1.277 5.692 3 3 0 0 1-1.13-.255 2.98 2.98 0 0 1-1.51-3.925" fill-opacity="1"/></svg>
+                            Rust
+                        </li>
+                    </ul>
+                </div>
+                <div class="column is-4">
+                    <h3 class="title is-4">Frameworks</h3>
+                    <ul>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="24" height="24" viewBox="0 0 100 100"><path fill="#61DAFB" d="M50.307 58.817a8.816 8.816 0 1 0 0-17.632 8.816 8.816 0 0 0 0 17.632"/><path stroke="#61DAFB" stroke-width="5" d="M50.307 68.063c26.126 0 47.306-8.087 47.306-18.062s-21.18-18.063-47.306-18.063C24.18 31.938 3 40.025 3 50.001s21.18 18.062 47.307 18.062Z"/><path stroke="#61DAFB" stroke-width="5" d="M34.664 59.032C47.727 81.658 65.321 95.957 73.96 90.969c8.64-4.988 5.053-27.373-8.01-50C52.885 18.343 35.291 4.044 26.652 9.032s-5.052 27.373 8.011 50Z"/><path stroke="#61DAFB" stroke-width="5" d="M34.664 40.97c-13.063 22.626-16.65 45.011-8.01 50 8.638 4.987 26.232-9.312 39.295-31.938 13.064-22.627 16.65-45.012 8.01-50-8.638-4.988-26.232 9.31-39.295 31.937Z"/></svg>
+                            React
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="24" height="24" viewBox="0 0 100 100"><path fill="#41B883" d="M80 7h20L50 93.25 0 7h38.25L50 27 61.5 7z"/><path fill="#41B883" d="m0 7 50 86.25L100 7H80L50 58.75 19.75 7z"/><path fill="#35495E" d="M19.75 7 50 59 80 7H61.5L50 27 38.25 7z"/></svg>
+                            Vue.js
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="24" height="24" viewBox="0 0 100 100"><path fill="#000" d="M50 100c27.614 0 50-22.386 50-50S77.614 0 50 0 0 22.385 0 50s22.386 50 50 50"/><path fill="url(#a)" d="M83.06 87.511 38.412 30H30v39.983h6.73V38.546L77.777 91.58a50 50 0 0 0 5.283-4.069"/><path fill="url(#b)" d="M70.556 30h-6.667v40h6.667z"/><defs><linearGradient id="a" x1="60.556" x2="80.278" y1="64.722" y2="89.166" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="b" x1="67.222" x2="67.111" y1="30" y2="59.375" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs></svg>
+                            Next.js
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 100 100"><path d="M100 77.484c-3.637.926-5.887.04-7.906-2.992l-14.356-19.86-2.074-2.75L58.898 74.56c-1.918 2.73-3.925 3.918-7.5 2.949l21.47-28.817-19.99-26.03c3.438-.669 5.813-.329 7.923 2.75L75.69 45.52l15-20c1.922-2.73 3.989-3.766 7.438-2.762l-7.75 10.277-10.5 13.672c-1.25 1.563-1.078 2.629.07 4.14ZM.023 48.211l1.758-8.64c4.782-17.094 24.375-24.196 37.887-13.633 7.898 6.21 9.86 15 9.469 24.843H4.625C3.957 68.5 16.711 79.195 32.969 73.738c5.703-1.918 9.062-6.383 10.742-11.968.855-2.801 2.266-3.239 4.898-2.438-1.343 6.988-4.375 12.824-10.78 16.477-9.571 5.468-23.235 3.699-30.423-3.899-4.281-4.41-6.05-9.996-6.843-15.972-.125-.989-.375-1.93-.563-2.876q.024-2.425.023-4.851m4.684-1.188H44.93c-.262-12.812-8.239-21.914-19.14-21.992-11.97-.093-20.563 8.79-21.083 21.992m0 0" stroke="none" fill-rule="nonzero" fill="#fff" fill-opacity="1"/></svg>
+                            Express.js
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-logo mr-2">
+                                <path fill="#E0234E" d="M14.854 6.9a.606.606 0 0 1 .611.606v4.834c0 1.687-1.452 3.06-3.24 3.06H8.64a.606.606 0 0 1-.611-.606V7.506c0-.335.273-.606.611-.606zm-3.24 1.367h-1.39v3.061h1.39c.892 0 1.617-.685 1.617-1.53 0-.846-.725-1.53-1.617-1.53zM3.811 12.438a.606.606 0 0 1-.611-.606V7.506c0-.335.273-.606.61-.606h4.39c.337 0 .611.27.611.606v4.326c0 .335-.274.606-.61.606zm1.195-1.367h1.39V8.01h-1.39c-.892 0-1.617.685-1.617 1.53 0 .846.725 1.53 1.617 1.53zm7.684-3.672a.606.606 0 0 1 .611.606v4.834c0 1.687-1.452 3.06-3.24 3.06H8.64a.606.606 0 0 1-.611-.606V7.506c0-.335.273-.606.611-.606zm-3.24 1.367h-1.39v3.061h1.39c.892 0 1.617-.685 1.617-1.53 0-.846-.725-1.53-1.617-1.53zM16.446 12.74a.606.606 0 0 1-.482-.24l-2.202-2.86c-.152-.197-.04-.482.206-.482h1.223c.14 0 .27.062.358.17l1.314 1.711 1.314-1.712a.448.448 0 0 1 .358-.17h1.223c.246 0 .358.285.206.482l-2.202 2.86a.606.606 0 0 1-.482.24zm6.543-.301c0 .335-.274.606-.61.606h-1.056a.606.606 0 0 1-.611-.606V7.506c0-.335.273-.606.61-.606h1.057c.336 0 .61.27.61.606zm-2.278-5.133a1.028 1.028 0 1 1 0-2.055 1.028 1.028 0 0 1 0 2.055zm7.101 5.133c0 .335-.274.606-.61.606h-1.057a.606.606 0 0 1-.61-.606V9.956c0-1.13-.907-2.047-2.025-2.047s-2.025.918-2.025 2.047v2.783c0 .335-.274.606-.61.606h-1.057a.606.606 0 0 1-.611-.606V7.506c0-.335.274-.606.61-.606h1.058c.336 0 .61.27.61.606v.338a3.23 3.23 0 0 1 2.025-.724c1.784 0 3.235 1.465 3.235 3.272z"/>
+                            </svg>
+                            Nest.js
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="column is-4">
+                    <h3 class="title is-4">Outils &amp; Technologies</h3>
+                    <ul>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" fill="none" viewBox="0 0 100 100"><path fill="#2496ED" d="M99.014 41.089c-.271-.216-2.803-2.127-8.142-2.127a26 26 0 0 0-4.207.361c-1.034-7.083-6.89-10.536-7.153-10.691l-1.433-.827-.943 1.36a19.2 19.2 0 0 0-2.55 5.96c-.955 4.043-.374 7.841 1.68 11.088-2.48 1.382-6.459 1.722-7.264 1.752H3.131a3.13 3.13 0 0 0-3.127 3.113A47.4 47.4 0 0 0 2.89 68.005c2.27 5.95 5.645 10.334 10.037 13.017 4.922 3.014 12.918 4.736 21.982 4.736a65.6 65.6 0 0 0 12.207-1.107 51 51 0 0 0 15.932-5.787 43.8 43.8 0 0 0 10.872-8.9c5.22-5.908 8.328-12.487 10.64-18.334h.922c5.714 0 9.227-2.287 11.165-4.203a12.2 12.2 0 0 0 2.945-4.362l.409-1.197z"/><path fill="#2496ED" d="M9.236 46.036h8.827a.77.77 0 0 0 .771-.77v-7.863a.77.77 0 0 0-.766-.775H9.236a.77.77 0 0 0-.77.77v7.867a.77.77 0 0 0 .77.771m12.164 0h8.828a.77.77 0 0 0 .77-.77v-7.863a.77.77 0 0 0-.766-.775H21.4a.775.775 0 0 0-.775.775v7.862a.775.775 0 0 0 .775.771m12.35 0h8.827a.77.77 0 0 0 .77-.77v-7.863a.77.77 0 0 0-.766-.775h-8.832a.77.77 0 0 0-.77.77v7.867a.77.77 0 0 0 .77.771m12.204 0h8.827a.775.775 0 0 0 .775-.77v-7.863a.775.775 0 0 0-.775-.775h-8.827a.77.77 0 0 0-.771.77v7.867a.77.77 0 0 0 .77.771M21.4 34.725h8.828a.775.775 0 0 0 .77-.775v-7.863a.77.77 0 0 0-.77-.77H21.4a.775.775 0 0 0-.775.77v7.863a.78.78 0 0 0 .775.775m12.35 0h8.827a.775.775 0 0 0 .77-.775v-7.863a.77.77 0 0 0-.77-.77H33.75a.77.77 0 0 0-.771.77v7.863c0 .426.344.772.77.775m12.204 0h8.827a.78.78 0 0 0 .775-.775v-7.863a.775.775 0 0 0-.775-.77h-8.827a.77.77 0 0 0-.771.77v7.863c0 .426.344.772.77.775m.001-11.316h8.827a.775.775 0 0 0 .775-.77V14.77a.775.775 0 0 0-.775-.77h-8.827a.77.77 0 0 0-.771.77v7.867c0 .426.345.77.77.77m12.311 22.629h8.827a.775.775 0 0 0 .775-.77v-7.863a.775.775 0 0 0-.775-.775h-8.827a.77.77 0 0 0-.77.77v7.867a.77.77 0 0 0 .77.771"/></svg>
+                            Docker
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" fill="none" viewBox="0 0 100 100"><path fill="#DE4C36" d="M98.114 45.545 54.454 1.886a6.44 6.44 0 0 0-9.108 0l-9.066 9.067 11.5 11.5a7.65 7.65 0 0 1 7.869 1.834 7.66 7.66 0 0 1 1.817 7.916L68.55 43.289c2.682-.924 5.776-.326 7.918 1.819a7.66 7.66 0 0 1 0 10.836A7.662 7.662 0 0 1 63.96 47.61L53.623 37.272v27.202c.749.37 1.433.86 2.026 1.449a7.663 7.663 0 0 1 0 10.839 7.66 7.66 0 0 1-10.836 0 7.663 7.663 0 0 1 2.508-12.51V36.795a7.6 7.6 0 0 1-2.508-1.673 7.66 7.66 0 0 1-1.651-8.377L31.824 15.407 1.887 45.343a6.44 6.44 0 0 0 0 9.11l43.661 43.66a6.44 6.44 0 0 0 9.108 0l43.458-43.457a6.444 6.444 0 0 0 0-9.111"/></svg>
+                            Git
+                        </li>
+                    </ul>
+                </div>
+                <div class="column is-4">
+                    <h3 class="title is-4">BDD</h3>
+                    <ul>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 100 100"><path fill="#912626" d="M96.082 72.766C90.745 75.547 63.1 86.914 57.215 89.982c-5.886 3.07-9.156 3.04-13.805.817-4.65-2.223-34.07-14.106-39.37-16.64C1.393 72.895 0 71.825 0 70.816V60.708s38.3-8.338 44.484-10.556c6.183-2.219 8.328-2.299 13.59-.371S94.8 57.385 100 59.29l-.002 9.965c0 .999-1.2 2.095-3.916 3.51"/><path fill="#C6302B" d="M96.08 62.718c-5.336 2.78-32.98 14.147-38.866 17.215-5.885 3.07-9.155 3.04-13.804.817-4.65-2.221-34.068-14.107-39.367-16.64-5.3-2.533-5.41-4.276-.205-6.314S38.3 44.279 44.484 42.06s8.328-2.299 13.59-.37c5.262 1.927 32.742 12.865 37.941 14.769 5.202 1.907 5.401 3.476.065 6.258"/><path fill="#912626" d="M96.082 56.41C90.745 59.194 63.1 70.56 57.215 73.63c-5.886 3.067-9.156 3.037-13.805.815-4.65-2.223-34.07-14.107-39.37-16.641C1.393 56.54 0 55.472 0 54.462v-10.11s38.3-8.337 44.484-10.555c6.183-2.218 8.328-2.299 13.59-.371S94.8 41.029 100 42.934l-.002 9.966c0 .999-1.2 2.095-3.916 3.51"/><path fill="#C6302B" d="M96.08 46.363c-5.336 2.78-32.98 14.147-38.866 17.216-5.885 3.068-9.155 3.038-13.804.816S9.342 50.288 4.043 47.756c-5.3-2.532-5.41-4.276-.205-6.315C9.043 39.403 38.3 27.924 44.484 25.706s8.328-2.299 13.59-.37c5.262 1.927 32.742 12.864 37.941 14.769 5.202 1.906 5.401 3.476.065 6.258"/><path fill="#912626" d="M96.082 39.45C90.745 42.23 63.1 53.597 57.215 56.666c-5.886 3.068-9.156 3.038-13.805.816C38.76 55.26 9.34 43.376 4.04 40.843 1.393 39.578 0 38.51 0 37.502V27.39s38.3-8.337 44.484-10.555c6.183-2.218 8.328-2.298 13.59-.37S94.8 24.067 100 25.973l-.002 9.965c0 .998-1.2 2.094-3.916 3.51"/><path fill="#C6302B" d="M96.08 29.401C90.744 32.182 63.1 43.55 57.214 46.618c-5.885 3.068-9.155 3.038-13.804.816S9.342 33.327 4.043 30.794c-5.3-2.531-5.41-4.276-.205-6.314S38.3 10.964 44.484 8.745s8.328-2.298 13.59-.37 32.742 12.865 37.941 14.77c5.202 1.904 5.401 3.475.065 6.256"/><path fill="#fff" d="m62.22 19.568-8.598.893-1.924 4.63-3.109-5.167-9.928-.892 7.408-2.672-2.223-4.1 6.936 2.712 6.538-2.14-1.767 4.24zM51.184 42.036 35.14 35.38l22.992-3.53zM28.938 22.142c6.787 0 12.29 2.133 12.29 4.764 0 2.63-5.503 4.763-12.29 4.763S16.65 29.536 16.65 26.905c0-2.63 5.502-4.763 12.29-4.763"/><path fill="#621B1C" d="m72.38 20.834 13.609 5.377-13.596 5.373z"/><path fill="#9A2928" d="m57.326 26.79 15.055-5.956.012 10.75-1.477.577z"/></svg>
+                            Redis
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-logo mr-2">
+                                <path fill="#F05032" d="M24,1.5l-4.5,4.5V19.5h4.5v-18h0zM.036,5.747L.25,5.5 7.321,12.572l-7.071,7.071L4.5,22.5h15l4.285-4.286 -7.071-7.071L4.5,4.5H0.036v1.247zM19.5,19.5H4.5V7.5l7.5,7.5 7.5-7.5v12z"/>
+                            </svg>
+                            ElasticSearch
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" fill="none" viewBox="0 0 100 100"><path fill="#599636" d="m50.146.274 2.668 5.012c.6.925 1.25 1.743 2.016 2.506a70 70 0 0 1 6.262 7.08c4.521 5.938 7.57 12.53 9.749 19.661 1.306 4.356 2.015 8.825 2.069 13.343.218 13.509-4.413 25.108-13.75 34.748a40 40 0 0 1-4.905 4.193c-.925 0-1.363-.71-1.744-1.362a11.2 11.2 0 0 1-1.362-3.922c-.328-1.634-.544-3.268-.438-4.956v-.762c-.075-.163-.89-75.157-.566-75.541"/><path fill="#6CAC48" d="M50.146.108c-.11-.219-.22-.053-.329.053.053 1.094-.328 2.069-.925 3-.656.925-1.524 1.634-2.396 2.397-4.844 4.193-8.656 9.258-11.709 14.924-4.062 7.624-6.156 15.795-6.75 24.398-.271 3.103.982 14.052 1.96 17.21 2.669 8.388 7.462 15.415 13.67 21.515 1.526 1.469 3.157 2.831 4.844 4.14.49 0 .544-.437.656-.762q.324-1.045.491-2.125l1.094-8.168z"/><path fill="#C2BFBF" d="M52.814 90.136c.11-1.25.71-2.288 1.362-3.322-.656-.272-1.143-.812-1.524-1.415a10 10 0 0 1-.813-1.797c-.762-2.288-.925-4.687-1.143-7.025v-1.415c-.272.219-.329 2.069-.329 2.343a54 54 0 0 1-.98 7.353c-.163.981-.273 1.96-.876 2.831 0 .11 0 .219.053.381.981 2.888 1.25 5.828 1.416 8.825v1.093c0 1.306-.053 1.031 1.031 1.469.438.162.925.219 1.362.544.329 0 .382-.272.382-.491l-.163-1.797v-5.012c-.053-.875.11-1.743.219-2.562z"/></svg>
+                            MongoDB
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-logo mr-2">
+                                <path fill="#47A248" d="M6.527 7.656c.416 0 .79.091 1.122.273l1.958-1.96A5.922 5.922 0 0 0 6.527 5c-3.305 0-5.98 2.686-5.98 5.99a5.96 5.96 0 0 0 1.55 3.965l1.96-1.96a2.55 2.55 0 0 1-.53-1.545A2.57 2.57 0 0 1 6.53 7.656zm3.479 3.604L13.8 5.99A5.96 5.96 0 0 0 9.834 4.44l-1.96 196a2.55 2.55 0 0 1-.53-1.545A2.57 2.57 0 0 1 6.53 7.656zm3.479 3.604L13.8 5.99A5.96 5.96 0 0 0 9.834 4.44l-1.96 1.96a2.55 2.55 0 0 1-.53-1.545A2.57 2.57 0 0 1 6.53 7.656zm3.479 3.604L13.8 5.99A5.96 5.96 0 0 0 9.834 4.44l-1.96 1.96 2.98 3 1.32-1.43.85 1.96-1.28 1.68-1.57-1.84 2.32.77 1.9-1.86-1.46 1.64 1.96.64z"/>
+                            </svg>
+                            PostgreSQL
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="title is-2 has-text-centered">Blog</h2>
+            <div class="column is-4">
+                <h3 class="title is-4">En cours de création</h3>
+                <p>Contenu à venir...</p>
+            </div>
+            <!-- <div class="columns">
+                <div class="column is-4">
+                    <h3 class="title is-4">Blog Post 1</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+                </div>
+                <div class="column is-4">
+                    <h3 class="title is-4">Blog Post 2</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+                </div>
+                <div class="column is-4">
+                    <h3 class="title is-4">Blog Post 3</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="title is-2 has-text-centered mt-6">Services</h2>
+            <div class="columns  mb-6 ">
+                <div class="column is-3">
+                    <h3 class="title is-3">Expertise JS/TS 🧑‍💻 </h3>
+                    <p>En back comme en Front je vous fournis une expertise sur l'ecosysteme JS, fort de mes 12 années d'experiences dessus. <br/> Je suis capable de mener a bien vos missions et developpement sur Node, Bun, React, Vue, Angular Electron, Nest, Next ... et tout ce qui tourne autour de Javascript</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-3">Applis web et Desktop  📱 💻</h3>
+                    <p>Je peux vous assurez le developpement de vos applis web et mobile via NativeScript ou React Native, ainsi que vos applis desktop  via Electron ou Tauri</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-3">Encadrement technique | Scalabilité 🚀</h3>
+                    <p>Je peux vous fournir un encadrement technique (Lead/CTO) afin d'architecturer vos services et applications (de la mise en place de la stack, jusq'au deploiement via CD), diagnostiquer les difficultés sur un projet et vous aider a résoudre les problémes de performances.</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title is-3">Facilitateur | Coaching Agile 💪 </h3>
+                    <p>J'ai été formé avec certification en 2015 aux méthodes agiles et particuliérement à SCRUM, je peux fournir une aide methodologique pour huiler vos process de developpement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiences" class="section">
+        <div class="container">
+            <h2 class="title is-2 has-text-centered">Experiences</h2>
+            <div class="columns is-multiline">
+    
+                <div class="column is-4">
+                    <h3 class="title">Ava</h3>
+                    <h4 class="subtitle">Senior Fullstack Typescript & Rust</h4>
+                    <p>Octobre 2023 - Présent (1 an 3 mois)</p>
+                    <p>Ava offre aux personnes sourdes et malentendantes les meilleurs sous-titres en direct.</p>
+                    <ul>
+                        <li>Backend Typescript avec Mongo/Redis</li>
+                        <li>Frontend avec React (hooks)</li>
+                        <li>ElectronJS et Tauri Rust App</li>
+                        <li>Développement en Rust</li>
+                    </ul>
+                </div>
+    
+                <div class="column is-4">
+                    <h3 class="title">Ankorstore</h3>
+                    <h4 class="subtitle">Senior Fullstack Typescript</h4>
+                    <p>Août 2021 - Septembre 2023 (2 ans 2 mois)</p>
+                    <p>Travail dans une scale-up agile Licorne pour connecter marques et détaillants.</p>
+                    <ul>
+                        <li>Vue.JS 2/3, Typescript 4.X, VueX</li>
+                        <li>Migration de Webpack à ViteJS</li>
+                        <li>Tests avec Jest (100% couverture) et Cypress</li>
+                        <li>Amélioration de la pile technique</li>
+                    </ul>
+                </div>
+    
+                <div class="column is-4">
+                    <h3 class="title">PhantomBuster</h3>
+                    <h4 class="subtitle">Lead Fullstack Typescript</h4>
+                    <p>Mars 2021 - Août 2021 (6 mois)</p>
+                    <p>Lead d'une équipe de 5 développeurs en méthodologies agiles.</p>
+                    <ul>
+                        <li>Typescript, Node.JS, React</li>
+                        <li>Proposition et implémentation de bonnes pratiques</li>
+                    </ul>
+                    <p>Senior Développeur Fullstack Typescript/React</p>
+                    <p>Août 2019 - Mars 2021 (1 an 8 mois)</p>
+                    <ul>
+                        <li>Développement cross-platform (Electron, Web-Extension)</li>
+                        <li>React (hooks), Redux, API GraphQL (Prisma)</li>
+                        <li>Tests avec Jest, Puppeteer, Cypress</li>
+                    </ul>
+                </div>
+    
+                <div class="column is-4">
+                    <h3 class="title">Mobicoop</h3>
+                    <h4 class="subtitle">Fullstack & Scrum Master</h4>
+                    <p>Mars 2018 - Août 2019 (1 an 6 mois)</p>
+                    <p>Développement d'une application de covoiturage open-source.</p>
+                    <ul>
+                        <li>NativeScript, VueJS, React-admin</li>
+                        <li>Mise en place de CI/CD et tests</li>
+                        <li>Rôle de Scrum Master</li>
+                    </ul>
+                </div>
+    
+                <div class="column is-4">
+                    <h3 class="title">INIST-CNRS</h3>
+                    <h4 class="subtitle"> Fullstack JS Big Data</h4>
+                    <p>2013 - 2018 (5 ans)</p>
+                    <p>Développement d'applications backend et frontend pour le traitement de Big Data.</p>
+                    <ul>
+                        <li>Node.js (ES6), Redis, ElasticSearch</li>
+                        <li>Frontend avec AngularJS</li>
+                        <li>Machine Learning avec Tesseract et OpenCV</li>
+                        <li>Utilisation de Docker pour la production</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="certifications" class="section">
+        <div class="container" >
+            <h2 class="title is-2 has-text-centered mt-6">Certifications ⭐️</h2>
+            <div class="columns is-multiline  mb-6">
+                <div class="column is-3">
+                    <h3 class="title">RUST, 2023</h3>
+                    <p>Formation certificiante assurée par Human Coders</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">NodeJS, 2015</h3>
+                    <p>Formation certifiante assurée par Zenika</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">AngularJS, 2015</h3>
+                    <p>Formation certifiante assurée par Zenika</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">SCRUM, 2015</h3>
+                    <p>Formation certifiante assurée par Pierre Neis</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">HTML5/CSS3, 2014</h3>
+                    <p>Formation certifiante assurée par Alsacreation Raphael Goetter</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">Licence Pro CIASIE</h3>
+                    <p>Formation diplomante, université de lorraine, VAE</p>
+                </div>
+                <div class="column is-3">
+                    <h3 class="title">BAC Scientifique</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <h3 class="title">Réseaux sociaux</h3>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/matthias-d-b9504296/" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://github.com/MatthD" target="_blank">GitHub</a></li>
+                        <li><a href="https://www.malt.fr/profile/mattd2" target="_blank">Malt</a></li>
+                    </ul>
+                </div>
+                <div class="column is-6">
+                    <h3 class="title">Legal</h3>
+                    <ul>
+                        <li>&copy; 2025 Matthias DIEUDONNE</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  $navbarBurgers.forEach(el => {
+    el.addEventListener('click', () => {
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+    });
+  });
+
+  const $socialLinks = Array.prototype.slice.call(document.querySelectorAll('footer a'), 0);
+  $socialLinks.forEach(el => {
+    el.addEventListener('click', () => {
+      window.open(el.href, '_blank');
+    });
+  });
+});</script>
+</body>
+</html>
